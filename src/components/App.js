@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { Route, Switch } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -10,8 +10,12 @@ import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
+import ProtectedRoute from "./ProtectedRoute";
+import Login from "./Login";
+import Register from "./Register";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [onEditAvatar, setOnEditAvatar] = useState(false);
   const [onAddPlace, setOnAddPlace] = useState(false);
@@ -20,6 +24,7 @@ function App() {
   const [currentUser, setCurrentUser] = useState([]);
   const [cards, setCards] = useState([]);
   const [cardDeleteId, setCardDeleteId] = useState(null);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
 
   useEffect(() => {
     api
@@ -130,24 +135,15 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Routes>
-        <Route path="/sign-up" element={<Sing-up />}/>
-        <Route path="/sign-in" element={<Sing-in />}/>
-      </Routes>
       <div className="app">
         <div className="page">
+          
           <Header />
-          <Main
-            isEditProfilePopupOpen={handleEditProfileClick}
-            isAddPlacePopupOpen={handleAddPlaceClick}
-            isEditAvatarPopupOpen={handleEditAvatarClick}
-            isImagePopupOpen={handleCardClick}
-            isCardLike={handleCardLike}
-            handleCardDelete={handleCardDelete}
-            isDeleteCard={deleteCardPopup}
-            cards={cards}
-          />
+
+            <Login /*onLogin={handleAuthorization} *//>
+
           <Footer />
+
           {/* Popup 1 редактирование профиля */}
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
