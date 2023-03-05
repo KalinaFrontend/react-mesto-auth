@@ -12,6 +12,7 @@ import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
+import Register from "./Register";
 import * as auth from "../utils/auth";
 
 function App() {
@@ -170,20 +171,21 @@ function App() {
         <div className="page">
           <Header />
           <Routes>
-          <Route path="/sign-in" element={<Login onLogin={handleAuthorization} />} />
-          <Route path="/" element={ <ProtectedRoute
-            path="/"
-            component={Main}
-            loggedIn={loggedIn}
-            isEditProfilePopupOpen={handleEditProfileClick}
-            isAddPlacePopupOpen={handleAddPlaceClick}
-            isEditAvatarPopupOpen={handleEditAvatarClick}
-            isImagePopupOpen={handleCardClick}
-            isCardLike={handleCardLike}
-            handleCardDelete={handleCardDelete}
-            isDeleteCard={deleteCardPopup}
-            cards={cards}
-          />}/>
+            <Route path="/sign-in" element={<Login onLogin={handleAuthorization} />}/>
+            <Route path="/sign-up" element={<Register onLogin={handleAuthorization} />}/>
+            <Route path="/" element={<ProtectedRoute
+                  component={Main}
+                  loggedIn={loggedIn}
+                  isEditProfilePopupOpen={handleEditProfileClick}
+                  isAddPlacePopupOpen={handleAddPlaceClick}
+                  isEditAvatarPopupOpen={handleEditAvatarClick}
+                  isImagePopupOpen={handleCardClick}
+                  isCardLike={handleCardLike}
+                  handleCardDelete={handleCardDelete}
+                  cards={cards}
+                />
+              }
+            />
           </Routes>
           <Footer />
 

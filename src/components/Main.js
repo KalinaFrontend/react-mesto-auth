@@ -9,7 +9,6 @@ function Main({
   isEditAvatarPopupOpen,
   isImagePopupOpen,
   isCardLike,
-  isDeleteCard,
   cards,
   handleCardDelete,
 }) {
