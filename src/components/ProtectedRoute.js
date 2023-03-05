@@ -1,4 +1,4 @@
-import { Route, Navigate, Redirect } from 'react-router-dom';
+import { Route, Navigate} from 'react-router-dom';
 import React from 'react';
 
 const ProtectedRoute = ({ component: Component, ...props }) => {

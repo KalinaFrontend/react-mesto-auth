@@ -1,0 +1,21 @@
+.login__save-button{
+    width: 358px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    font-size: 18px;
+    line-height: 22px;
+    border: none;
+    border-radius: 2px;
+    transition: 0.8s ease;
+    margin: 216px 0 0;
+    padding: 0;
+  }
+  
+  .auth__form button:hover {
+    opacity: 0.85;
+    cursor: pointer;
+  }

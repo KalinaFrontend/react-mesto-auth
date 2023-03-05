@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
@@ -12,10 +12,10 @@ import AddPlacePopup from "./AddPlacePopup";
 import DeleteCardPopup from "./DeleteCardPopup";
 import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
-import Register from "./Register";
+import * as auth from "../utils/auth";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [onEditAvatar, setOnEditAvatar] = useState(false);
   const [onAddPlace, setOnAddPlace] = useState(false);
@@ -25,6 +25,8 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardDeleteId, setCardDeleteId] = useState(null);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     api
@@ -121,6 +123,35 @@ function App() {
       .catch(console.error);
   }
 
+  function handleAuthorization(data) {
+    auth
+      .authorization(data)
+      .then((data) => {
+        if (data.jwt) {
+          localStorage.setItem("jwt", data.jwt);
+          setLoggedIn(true);
+          handleTokenCheck();
+          navigate("/");
+        }
+      })
+      .catch(console.error);
+  }
+
+  // Проверка токена
+  const handleTokenCheck = () => {
+    const jwt = localStorage.getItem("jwt");
+    if (!jwt) {
+      return;
+    }
+    auth
+      .getContent(jwt)
+      .then((data) => {
+        setLoggedIn(true);
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
+  };
+
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api
@@ -137,11 +168,23 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <div className="page">
-          
           <Header />
-
-            <Login /*onLogin={handleAuthorization} *//>
-
+          <Routes>
+          <Route path="/sign-in" element={<Login onLogin={handleAuthorization} />} />
+          <Route path="/" element={ <ProtectedRoute
+            path="/"
+            component={Main}
+            loggedIn={loggedIn}
+            isEditProfilePopupOpen={handleEditProfileClick}
+            isAddPlacePopupOpen={handleAddPlaceClick}
+            isEditAvatarPopupOpen={handleEditAvatarClick}
+            isImagePopupOpen={handleCardClick}
+            isCardLike={handleCardLike}
+            handleCardDelete={handleCardDelete}
+            isDeleteCard={deleteCardPopup}
+            cards={cards}
+          />}/>
+          </Routes>
           <Footer />
 
           {/* Popup 1 редактирование профиля */}
