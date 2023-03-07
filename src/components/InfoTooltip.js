@@ -8,7 +8,7 @@ function InfoTooltip ({isOpen, onClose, isSuccess}) {
     <div className={
         isOpen
           ? `popup popup_opened`
-          : `popup po`
+          : `popup`
       }>
       <div className="popup__container">
         <button type="button" className="popup__close" onClick={onClose} />
