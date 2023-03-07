@@ -14,6 +14,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Login from "./Login";
 import Register from "./Register";
 import * as auth from "../utils/auth";
+import InfoTooltip from "../components/InfoTooltip";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -26,6 +27,8 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardDeleteId, setCardDeleteId] = useState(null);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false);
+
 
   const navigate = useNavigate();
 
@@ -91,6 +94,7 @@ function App() {
     setOnEditAvatar(false);
     setOnAddPlace(false);
     setOnDeleteCard(false);
+    setIsInfoTooltipOpen(false);
     setSelectedCard(null);
   };
 
@@ -215,6 +219,12 @@ function App() {
           />
           {/* Popup 5 открытие карточки */}
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+
+          <InfoTooltip 
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopups}
+          isSuccess={isRegistrationSuccessful}
+          />
         </div>
       </div>
     </CurrentUserContext.Provider>
