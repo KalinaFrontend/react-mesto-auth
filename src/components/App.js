@@ -27,7 +27,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardDeleteId, setCardDeleteId] = useState(null);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false);
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(null);
 
 
   const navigate = useNavigate();
@@ -50,6 +50,10 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
+  }, []);
+
+  useEffect(() => {
+    handleTokenCheck();
   }, []);
 
   const handleEditProfileClick = () => {
@@ -84,6 +88,7 @@ function App() {
   const handleAddPlaceClick = () => {
     setOnAddPlace(true);
   };
+
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
@@ -132,14 +137,23 @@ function App() {
     auth
       .authorization(data)
       .then((data) => {
-        if (data.jwt) {
-          localStorage.setItem("jwt", data.jwt);
+        if (data.token) {
+          localStorage.setItem("jwt", data.token);
           setLoggedIn(true);
           handleTokenCheck();
-          navigate("/");
         }
       })
       .catch(console.error);
+  }
+
+  function handleRegistration(data) {
+    auth
+    .registration(data)
+    .then(() => {
+    setIsRegistrationSuccessful(true);
+    })
+    .catch(console.error);
+    setIsInfoTooltipOpen(true);
   }
 
   // Проверка токена
@@ -176,9 +190,9 @@ function App() {
           <Header />
           <Routes>
             <Route path="/sign-in" element={<Login onLogin={handleAuthorization} />}/>
-            <Route path="/sign-up" element={<Register onLogin={handleAuthorization} />}/>
+            <Route path="/sign-up" element={<Register onLogin={handleRegistration} />}/>
             <Route path="/" element={<ProtectedRoute
-                  component={Main}
+                  element={Main}
                   loggedIn={loggedIn}
                   isEditProfilePopupOpen={handleEditProfileClick}
                   isAddPlacePopupOpen={handleAddPlaceClick}

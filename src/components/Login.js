@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 
-function Login(onLogin) {
+function Login({onLogin}) {
   const [values, setValues] = useState({});
 
   useEffect(() => {

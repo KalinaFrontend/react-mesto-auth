@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 
-function Register(onLogin) {
+function Register({onLogin}) {
     const [values, setValues] = useState({});
 
     useEffect(() => {
@@ -15,7 +15,7 @@ function Register(onLogin) {
         [name]: value
       }) 
     } 
-  
+
     function handleSubmit(e) {
       e.preventDefault();
       onLogin(values);

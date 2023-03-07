@@ -4,13 +4,14 @@ import "../index.css";
 import Card from "./Card";
 
 function Main({
+  loggedIn,
   isEditProfilePopupOpen,
   isAddPlacePopupOpen,
   isEditAvatarPopupOpen,
   isImagePopupOpen,
   isCardLike,
-  cards,
   handleCardDelete,
+  cards,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
