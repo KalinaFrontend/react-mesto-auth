@@ -42,6 +42,7 @@ function Register({onLogin}) {
             className="login__input"
             minLength="2"
             maxLength="40"
+            placeholder="Email"
             value={values.email || ""}
             onChange={handleChange}
             required
@@ -55,6 +56,7 @@ function Register({onLogin}) {
             className="login__input"
             minLength="2"
             maxLength="200"
+            placeholder="Пароль"
             value={values.password || ""}
             onChange={handleChange}
             required
