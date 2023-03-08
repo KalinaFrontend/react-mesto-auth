@@ -4,10 +4,11 @@
 
 @media screen and (max-width: 640px) {
     .header__menu-button {
+    margin-right: 30px;
     padding: 0;
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border: none;
     background-color: transparent;
     background-size: cover;
