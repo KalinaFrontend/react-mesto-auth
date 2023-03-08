@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 function Register({onLogin}) {
     const [values, setValues] = useState({});
+    const [errors, setErrors] = useState({});
 
     useEffect(() => {
       setValues({});
@@ -14,6 +15,11 @@ function Register({onLogin}) {
         ...values, 
         [name]: value
       }) 
+
+      setErrors({
+        ...errors,
+        [name]: event.target.validationMessage,
+      });
     } 
 
     function handleSubmit(e) {
@@ -40,7 +46,7 @@ function Register({onLogin}) {
             onChange={handleChange}
             required
           />
-          <span className="popup__input-error email-input-error"></span>
+          <span className="popup__input-error login__input-error">{errors.email}</span>
   
           <input
             id="password-input"
@@ -53,7 +59,7 @@ function Register({onLogin}) {
             onChange={handleChange}
             required
           />
-          <span className="popup__input-error password-input-error"></span>
+          <span className="popup__input-error login__input-error">{errors.password}</span>
   
           <button type="submit" className="login__save-button">
             Зарегистрироваться

@@ -1,7 +1,7 @@
 .header {
   max-width: 880px;
   margin: 0 auto;
-  padding: 45px 0 0;
+  padding: 60px 0 20px;
   min-height: 73px;
   border-bottom: 1px solid #545454;
   display: flex;

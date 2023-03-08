@@ -71,3 +71,4 @@
 @import url(./blocks/login/__input/login__input.css);
 @import url(./blocks/login/__save-button/login__save-button.css);
 @import url(./blocks/login/__auth-link/login__auth-link.css);
+@import url(./blocks/login/__input-error/login__input-error.css);
