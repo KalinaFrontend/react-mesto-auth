@@ -1,0 +1,18 @@
+@media screen and (max-width: 640px) {
+    .header__nav-open {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        position: absolute;
+        top: 90px;
+        left: 0;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: right;
+        color: #FFFFFF;
+    }   
+  }
+  

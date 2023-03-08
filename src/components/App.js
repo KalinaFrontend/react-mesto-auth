@@ -28,6 +28,7 @@ function App() {
   const [cardDeleteId, setCardDeleteId] = useState(null);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
   const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(null);
+  const [userData, setUserData] = useState('');
 
 
   const navigate = useNavigate();
@@ -165,6 +166,7 @@ function App() {
     auth
       .getContent(jwt)
       .then((data) => {
+        setUserData(data.data.email);
         setLoggedIn(true);
         navigate("/");
       })
@@ -183,11 +185,16 @@ function App() {
       .catch(console.error);
   }
 
+  function handleLoginOut() {
+    setLoggedIn(false);
+    localStorage.removeItem("jwt");
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <div className="page">
-          <Header />
+          <Header userEmail={userData} onExit={handleLoginOut}/>
           <Routes>
             <Route path="/sign-in" element={<Login onLogin={handleAuthorization} />}/>
             <Route path="/sign-up" element={<Register onLogin={handleRegistration} />}/>

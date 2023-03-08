@@ -1,0 +1,18 @@
+.header__exit {
+  margin-left: 24px;
+  padding: 0;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  font-style: normal;
+  font-weight: 400;
+  color: #A9A9A9;
+}
+
+@media screen and (max-width: 640px) {
+  .header__exit {
+    margin-left: 0px;
+    margin-top: 18px;
+  }   
+}
+  

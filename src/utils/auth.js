@@ -1,7 +1,3 @@
-const headers = {
-    'Content-Type': 'application/json',
-  };
-
 const checkResponse = (res) => {
     if (res.ok) {
       return res.json();
