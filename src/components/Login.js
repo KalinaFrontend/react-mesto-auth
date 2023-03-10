@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 function Login({ onLogin }) {
   const [values, setValues] = useState({});
-  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setValues({});
@@ -14,11 +13,6 @@ function Login({ onLogin }) {
     setValues({
       ...values,
       [name]: value,
-    });
-
-    setErrors({
-      ...errors,
-      [name]: event.target.validationMessage,
     });
   };
 
@@ -43,10 +37,6 @@ function Login({ onLogin }) {
           onChange={handleChange}
           required
         />
-        <span className="popup__input-error login__input-error">
-          {errors.email}
-        </span>
-
         <input
           id="password-input"
           name="password"
@@ -59,10 +49,6 @@ function Login({ onLogin }) {
           onChange={handleChange}
           required
         />
-        <span className="popup__input-error login__input-error">
-          {errors.password}
-        </span>
-
         <button type="submit" className="login__save-button">
           Войти
         </button>
