@@ -7,6 +7,12 @@
   font-style: normal;
   font-weight: 400;
   color: #A9A9A9;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.header__exit:hover {
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 640px) {

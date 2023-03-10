@@ -18,6 +18,11 @@ function Header({ userEmail, onExit }) {
     setImages(!images);
   }
 
+  function onExitMenu () {
+    onExit();
+    setOpenMenu(!openMenu);
+  }
+
   return (
     <header className={
       openMenu ?
@@ -52,7 +57,8 @@ function Header({ userEmail, onExit }) {
                 <span>{userEmail}</span>
               </li>
               <li className="header__menu-item">
-                <button className="header__exit" onClick={() => onExit()}>
+                <button className="header__exit" onClick={onExitMenu}
+>
                   Выйти
                 </button>
               </li>
