@@ -52,8 +52,7 @@ function Login({ onLogin }) {
         <button type="submit" className="login__save-button">
           Войти
         </button>
-        <Link to="" className="login__auth-link">
-        </Link>
+        <Link to="" className="login__auth-link"></Link>
       </form>
     </div>
   );

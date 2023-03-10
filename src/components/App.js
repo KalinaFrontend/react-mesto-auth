@@ -27,9 +27,10 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardDeleteId, setCardDeleteId] = useState(null);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(null);
-  const [userData, setUserData] = useState('');
-
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(
+    null
+  );
+  const [userData, setUserData] = useState("");
 
   const navigate = useNavigate();
 
@@ -57,27 +58,6 @@ function App() {
     handleTokenCheck();
   }, []);
 
-  const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(true);
-  };
-
-  const handleCardDelete = (_id) => {
-    setCardDeleteId(_id);
-    deleteCardPopup();
-  };
-
-  const handleDeleteCardPopup = () => {
-    api
-      .deleteCard(cardDeleteId)
-      .then(() => {
-        setCards((state) => state.filter((item) => item._id !== cardDeleteId));
-        closeAllPopups();
-      })
-      .catch((err) => {
-        console.log(`Ошибка: ${err}`);
-      });
-  };
-
   const deleteCardPopup = () => {
     setOnDeleteCard(true);
   };
@@ -90,11 +70,33 @@ function App() {
     setOnAddPlace(true);
   };
 
-
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
+  
+  const handleEditProfileClick = () => {
+    setIsEditProfilePopupOpen(true);
+  };
 
+  const handleCardDelete = (_id) => {
+    setCardDeleteId(_id);
+    deleteCardPopup();
+  };
+
+  //Удалить карточку
+  const handleDeleteCardPopup = () => {
+    api
+      .deleteCard(cardDeleteId)
+      .then(() => {
+        setCards((state) => state.filter((item) => item._id !== cardDeleteId));
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Ошибка: ${err}`);
+      });
+  };
+
+  //Закрать все PopUp
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setOnEditAvatar(false);
@@ -104,6 +106,7 @@ function App() {
     setSelectedCard(null);
   };
 
+  //Изменить данные пользователя
   function handleUpdateUser(data) {
     api
       .setUserInfo(data)
@@ -113,7 +116,8 @@ function App() {
       })
       .catch(console.error);
   }
-
+  
+  //Изменить аватар
   function handleUpdateAvatar(avatar) {
     api
       .updateAvatar(avatar)
@@ -124,6 +128,7 @@ function App() {
       .catch(console.error);
   }
 
+  //Добавить карточку
   function handleAddPlaceSubmit(card) {
     api
       .setCard(card)
@@ -133,7 +138,8 @@ function App() {
       })
       .catch(console.error);
   }
-
+  
+  //Авторироваться
   function handleAuthorization(data) {
     auth
       .authorization(data)
@@ -147,17 +153,18 @@ function App() {
       .catch(console.error);
   }
 
+   //Зарегистрироваться
   function handleRegistration(data) {
     auth
-    .registration(data)
-    .then(() => {
-    setIsRegistrationSuccessful(true);
-    })
-    .catch(console.error);
+      .registration(data)
+      .then(() => {
+        setIsRegistrationSuccessful(true);
+      })
+      .catch(console.error);
     setIsInfoTooltipOpen(true);
   }
 
-  // Проверка токена
+  //Проверить токен
   const handleTokenCheck = () => {
     const jwt = localStorage.getItem("jwt");
     if (!jwt) {
@@ -173,6 +180,7 @@ function App() {
       .catch((err) => console.log(err));
   };
 
+   //Получить колличество лайков на карточке
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api
@@ -185,6 +193,7 @@ function App() {
       .catch(console.error);
   }
 
+   //Выйти из аккаунта
   function handleLoginOut() {
     setLoggedIn(false);
     localStorage.removeItem("jwt");
@@ -194,11 +203,20 @@ function App() {
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
         <div className="page">
-          <Header userEmail={userData} onExit={handleLoginOut}/>
+          <Header userEmail={userData} onExit={handleLoginOut} />
           <Routes>
-            <Route path="/sign-in" element={<Login onLogin={handleAuthorization} />}/>
-            <Route path="/sign-up" element={<Register onLogin={handleRegistration} />}/>
-            <Route path="/" element={<ProtectedRoute
+            <Route
+              path="/sign-in"
+              element={<Login onLogin={handleAuthorization} />}
+            />
+            <Route
+              path="/sign-up"
+              element={<Register onLogin={handleRegistration} />}
+            />
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute
                   element={Main}
                   loggedIn={loggedIn}
                   isEditProfilePopupOpen={handleEditProfileClick}
@@ -241,10 +259,10 @@ function App() {
           {/* Popup 5 открытие карточки */}
           <ImagePopup card={selectedCard} onClose={closeAllPopups} />
 
-          <InfoTooltip 
-          isOpen={isInfoTooltipOpen}
-          onClose={closeAllPopups}
-          isSuccess={isRegistrationSuccessful}
+          <InfoTooltip
+            isOpen={isInfoTooltipOpen}
+            onClose={closeAllPopups}
+            isSuccess={isRegistrationSuccessful}
           />
         </div>
       </div>
