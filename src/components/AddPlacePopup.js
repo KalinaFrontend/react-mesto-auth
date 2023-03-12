@@ -1,25 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
+import forms from "../utils/forms";
 
 function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
+  const {values, errors, inactive, handleChange, handleSubmit, resetForm } = forms(onUpdateCards);
   
-  const [values, setValues] = useState({});
-
-  useEffect(() => {
-    setValues({});
-  }, [isOpen]);
-
-  const handleChange = (event) => { 
-    const { name, value } = event.target;
-      setValues({ 
-      ...values, 
-      [name]: value
-    }) 
-  } 
-
-  function handleSubmit(e) {
-    e.preventDefault();
-    onUpdateCards(values);
+  const closePopup = () => {
+    onClose();
+    resetForm();
   }
 
   return (
@@ -28,8 +16,9 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
       name="add-element"
       buttonText="Создать"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={closePopup}
       onSubmit={handleSubmit}
+      inactive={inactive}
     >
       <label className="popup__label">
         <input
@@ -44,7 +33,7 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
           value={values.name || ''}
           onChange={handleChange}
         />
-        <span className="popup__input-error  imageName-input-error"></span>
+        <span className="popup__input-error  imageName-input-error">{errors.name}</span>
       </label>
       <label className="popup__label">
         <input
@@ -57,7 +46,7 @@ function AddPlacePopup({ isOpen, onClose, onUpdateCards }) {
           value={values.link || ''}
           onChange={handleChange}
         />
-        <span className="popup__input-error imageLink-input-error"></span>
+        <span className="popup__input-error imageLink-input-error">{errors.link}</span>
       </label>
     </PopupWithForm>
   );

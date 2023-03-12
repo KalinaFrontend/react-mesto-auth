@@ -9,6 +9,7 @@ function PopupWithForm({
   onClose,
   onSubmit,
   children,
+  inactive
 }) {
   return (
     <div
@@ -27,11 +28,11 @@ function PopupWithForm({
         <h2 className="popup__content-title">{title}</h2>
         <form
           name="popup-form-profile"
-          className="popup__form"
+          className="popup__form form"
           onSubmit={onSubmit}
         >
           {children}
-          <button type="submit" className="popup__save-button ">
+          <button type="submit" className={inactive ? `popup__save-button` : `popup__save-button popup__save-button_inactive`}>
             {buttonText}
           </button>
         </form>

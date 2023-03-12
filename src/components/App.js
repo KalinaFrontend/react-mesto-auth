@@ -27,9 +27,7 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardDeleteId, setCardDeleteId] = useState(null);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(
-    null
-  );
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(null);
   const [userData, setUserData] = useState("");
 
   const navigate = useNavigate();

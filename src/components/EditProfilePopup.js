@@ -1,36 +1,26 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 import PopupWithForm from "./PopupWithForm";
+import forms from "../utils/forms";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
+
+  const {values, errors, inactive, handleChange, handleSubmit, resetForm, setValues } = forms(onUpdateUser);
 
   const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
+    setValues({
+      name: currentUser.name,
+      about: currentUser.about});
   }, [currentUser, isOpen]);
 
-  const handleChangeName = (e) => {
-    const text = e.target.value;
-    setName(text);
-  };
 
-  const handleChangeDescription = (e) => {
-    const text = e.target.value;
-    setDescription(text);
-  };
-
-  function handleSubmit(e) {
-    e.preventDefault();
-
-    onUpdateUser({
-      name,
-      about: description,
-    });
+  const closePopup = () => {
+    onClose();
+    resetForm();
   }
+
 
   return (
     <PopupWithForm
@@ -38,8 +28,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       name="edit-profile"
       buttonText="Сохранить"
       isOpen={isOpen}
-      onClose={onClose}
+      onClose={closePopup}
       onSubmit={handleSubmit}
+      inactive={inactive}
     >
       <label className="popup__label">
         <input
@@ -49,11 +40,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           className="popup__input popup__input_type_name"
           minLength="2"
           maxLength="40"
-          value={name || ""}
-          onChange={handleChangeName}
+          value={values.name || ""}
+          onChange={handleChange}
           required
         />
-        <span className="popup__input-error userName-input-error"></span>
+        <span className="popup__input-error userName-input-error">{errors.name}</span>
       </label>
       <label className="popup__label">
         <input
@@ -63,11 +54,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           className="popup__input popup__input_type_job"
           minLength="2"
           maxLength="200"
-          value={description || ""}
-          onChange={handleChangeDescription}
+          value={values.about || ""}
+          onChange={handleChange}
           required
         />
-        <span className="popup__input-error useJob-input-error"></span>
+        <span className="popup__input-error useJob-input-error">{errors.about}</span>
       </label>
     </PopupWithForm>
   );

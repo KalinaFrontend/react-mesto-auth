@@ -15,6 +15,7 @@ function DeleteCardPopup({ isOpen, onClose, isDeleteCard }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
+      inactive={true}
       children={<></>}
     />
   );
