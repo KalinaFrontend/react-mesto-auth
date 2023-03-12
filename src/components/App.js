@@ -27,7 +27,9 @@ function App() {
   const [cards, setCards] = useState([]);
   const [cardDeleteId, setCardDeleteId] = useState(null);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(null);
+  const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(
+    null
+  );
   const [userData, setUserData] = useState("");
 
   const navigate = useNavigate();
@@ -50,9 +52,7 @@ function App() {
       .catch((err) => {
         console.log(`Ошибка: ${err}`);
       });
-  }, []);
 
-  useEffect(() => {
     handleTokenCheck();
   }, []);
 
@@ -71,7 +71,7 @@ function App() {
   const handleCardClick = (card) => {
     setSelectedCard(card);
   };
-  
+
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(true);
   };
@@ -114,7 +114,7 @@ function App() {
       })
       .catch(console.error);
   }
-  
+
   //Изменить аватар
   function handleUpdateAvatar(avatar) {
     api
@@ -136,7 +136,7 @@ function App() {
       })
       .catch(console.error);
   }
-  
+
   //Авторироваться
   function handleAuthorization(data) {
     auth
@@ -151,15 +151,15 @@ function App() {
       .catch(console.error);
   }
 
-   //Зарегистрироваться
+  //Зарегистрироваться
   function handleRegistration(data) {
     auth
       .registration(data)
+      .finally(setIsInfoTooltipOpen(true))
       .then(() => {
         setIsRegistrationSuccessful(true);
       })
       .catch(console.error);
-    setIsInfoTooltipOpen(true);
   }
 
   //Проверить токен
@@ -178,7 +178,7 @@ function App() {
       .catch((err) => console.log(err));
   };
 
-   //Получить колличество лайков на карточке
+  //Получить колличество лайков на карточке
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api
@@ -191,7 +191,7 @@ function App() {
       .catch(console.error);
   }
 
-   //Выйти из аккаунта
+  //Выйти из аккаунта
   function handleLoginOut() {
     setLoggedIn(false);
     localStorage.removeItem("jwt");
