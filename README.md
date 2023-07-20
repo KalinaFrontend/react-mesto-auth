@@ -11,6 +11,9 @@
   </a>
 </div>
 
+![Mesto React - Opera 2023-07-20 20-15-59](https://github.com/KalinaFrontend/react-mesto-auth/assets/111464624/873c0574-79c4-46c5-aa66-915bf36713f9)
+
+
 <a name="summary">
   <details>
     <summary>Оглавление</summary>
