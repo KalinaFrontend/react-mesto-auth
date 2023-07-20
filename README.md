@@ -7,7 +7,7 @@
 
 <div align="center">
   <a href="https://mesto-react-kalina.nomoredomains.monster/">
-    <img src=" https://github.com/KalinaFrontend/react-mesto-auth/assets/111464624/63b2d3d6-dfcc-4d14-8939-79113c92f0e9" width="550" alt="Гиф с демонстрацией функционала приложения">
+    <img src=" https://github.com/KalinaFrontend/react-mesto-auth/assets/111464624/63b2d3d6-dfcc-4d14-8939-79113c92f0e9.gif" width="550" alt="Гиф с демонстрацией функционала приложения">
   </a>
 </div>
 
