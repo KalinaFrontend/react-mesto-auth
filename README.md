@@ -6,13 +6,10 @@
 <h1 align="center">Учебный frontend-проект: "Место"</h1>
 
 <div align="center">
-  <a href="https://mesto-react-kalina.nomoredomains.monster/">
-   ![Mesto React - Opera 2023-07-20 20-15-59](https://github.com/KalinaFrontend/react-mesto-auth/assets/111464624/873c0574-79c4-46c5-aa66-915bf36713f9)
-  </a>
+![Mesto React - Opera 2023-07-20 20-15-59](https://github.com/KalinaFrontend/react-mesto-auth/assets/111464624/873c0574-79c4-46c5-aa66-915bf36713f9)
 </div>
 
 
-![Mesto React - Opera 2023-07-20 20-15-59](https://github.com/KalinaFrontend/react-mesto-auth/assets/111464624/873c0574-79c4-46c5-aa66-915bf36713f9)
 
 <a name="summary">
   <details>
