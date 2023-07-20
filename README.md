@@ -7,7 +7,7 @@
 
 <div align="center">
   <a href="https://mesto-react-kalina.nomoredomains.monster/">
-    <img src={![Mesto React - Opera 2023-07-20 20-15-59](https://github.com/KalinaFrontend/react-mesto-auth/assets/111464624/873c0574-79c4-46c5-aa66-915bf36713f9)} width="550" alt="Гиф с демонстрацией функционала приложения">
+   ![Mesto React - Opera 2023-07-20 20-15-59](https://github.com/KalinaFrontend/react-mesto-auth/assets/111464624/873c0574-79c4-46c5-aa66-915bf36713f9)
   </a>
 </div>
 
